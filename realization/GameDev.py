@@ -46,28 +46,28 @@ def turn_left():
     global direction
     direction -= 1
     if direction == -1:
-        direction = 3
+        direction = 3   # 북쪽을 바라보고 있다면 서쪽으로 회전.
 
 count = 1 # 시작 칸 방문 1 부터 시작.
 turn_time = 0
 
 while True:
     turn_left() # 회전
-    nx = A + dx[direction]
+    nx = A + dx[direction] # 시작점이 1, 1이고 북쪽을 바라보고 시작했다면 회전했기 때문에 서쪽으로 이동할 준비를 한다. 캐릭터가 1, 0 위치로 이동이 가능한지 탐색한다.
     ny = B + dy[direction]
     # 정면에 방문하지 않은 육지가 있는지 체크.
-    if d[nx][ny] == 0 and arr[nx][ny] == 0:
+    if d[nx][ny] == 0 and arr[nx][ny] == 0: # 1, 0이 방문한적이 없고, 육지라면 이동시키고, 다음 이동으로 넘어간다.
         d[nx][ny] = 1
         A = nx
         B = ny
         count += 1
         turn_time = 0
         continue
-    else:
+    else: # 아니라면 제자리에서 회전한 회수를 증가시킨다.
         turn_time += 1
-    # 네 방향 모두 갈 수 없으면
+    # 네 방향 모두 갈 수 없으면(제자리 회전 회수가 4라면)
     if turn_time == 4:
-        nx = A - dx[direction]
+        nx = A - dx[direction] # 현재 바라보고 있는 방향에서 뒤로 이동 시킨 준비를 한다.
         ny = B - dy[direction]
         if arr[nx][ny] == 0: # 뒤쪽에 육지가 있을 경우 캐릭터를 이동
             A = nx
