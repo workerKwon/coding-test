@@ -26,4 +26,18 @@ def dfs(graph, start, result):
             result = dfs(graph, i, result) # 재귀 함수를 사용해서 result를 리턴하므로 result를 탐색 중인 노드가 추가된 새로운 result로 변경.
     return result
 
-print(' '.join(map(str, dfs(matrix, v, []))))
+def bfs(graph, start, result):
+    result.append(start) # 결과에 시작노드를 추가
+    queue = [start] # 큐에 시작노드 추가
+    while queue: # 큐의 길이가 0이 될때까지
+        z = queue.pop(0) # 가장 먼저 들어간 것을 빼낸다.(큐의 최하단 요소를 빼내서 탐색한다.)
+        # 이 부분에 result.append(z)가 못들어가는 이유는 탐색 가능 조건이 result에 들어있지 않은 노드라서 특정 노드가 두 개 이상의 노드와 인접해 있다면 queue에 중복되어 쌓일 수 있고
+        # 큐에 중복되어 쌓인 노드를 모두 추출하는 반복문이기 때문에, 이 부분에 추출한 노드를 result에 포함한다면 result에도 중복된 수가 발생할 수 있다.
+        for i in range(1, n+1): # 1번 노드부터 시작하기 때문에 1부터 n까지 포함
+            if graph[z][i] and i not in result: # 탐색 중인 노드와 인접한 노드이면서 아직 탐색하지 않은 노드들 모두 큐에 넣는다.
+                queue.append(i)
+                result.append(i) # 조건문을 통화한 후 큐에 들어간 노드가 곧 탐색 순서이기 때문에, 큐에 들어간 순서대로 출력한다.
+    return result
+
+print(*dfs(matrix, v, []))
+print(*bfs(matrix, v, []))
