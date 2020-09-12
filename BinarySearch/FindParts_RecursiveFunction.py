@@ -29,15 +29,16 @@ find_parts = list(map(int, r().split()))
 
 parts.sort()
 find_parts.sort()
+
 def binary_search(parts, start, end, target):
-    if start > end:
+    if start > end: # 탐색 시작 인덱스가 탐색 마지막 인덱스보다 크면 target이 없는 것으로 'no' 출력
         return 'no'
-    mid = (start + end) // 2
-    if parts[mid] == target:
+    mid = (start + end) // 2 # 가운데 인덱스 찾기
+    if parts[mid] == target: # 가운데 인덱스의 값과 target이 같으면 'yes' 출력
         return 'yes'
-    elif parts[mid] > target:
+    elif parts[mid] > target: # 가운데 인덱스의 값이 target보다 크다면 탐색 마지막 인덱스를 (가운데 인덱스-1)로 둔 재귀함수를 반환해서 범위가 절반으로 줄어든 탐색을 다시 시도.
         return binary_search(parts, start, mid-1, target)
-    else:
+    else: # 가운데 인덱스의 값이 target보다 작다면 탐색 시작 인덱스를 (가운데 인덱스+1)로 둔 재귀함수를 반환해서 범위가 절반으로 줄어든 탐색을 다시 하도록 함.
         return binary_search(parts, mid+1, end, target)
 
 for i in find_parts:
