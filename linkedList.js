@@ -46,6 +46,20 @@ class LinkedList {
 
         return current_node._data
     }
+
+    index_of(value) {
+        let current_node = this._first_node
+        let current_index = 0
+
+        do {
+            if(current_node._data == value) return current_index
+
+            current_node = current_node._next_node
+            current_index += 1
+        } while (current_node)
+
+        return null
+    }
 }
 
 const node1 = new Node("one")
@@ -59,3 +73,4 @@ node3._next_node = node4
 const list = new LinkedList(node1)
 
 console.log(list.read(0))
+console.log(list.index_of("three"))
