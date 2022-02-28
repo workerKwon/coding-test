@@ -32,6 +32,20 @@ class LinkedList {
     constructor(first_node) {
         this._first_node = first_node
     }
+
+    read(index) {
+        let current_node = this._first_node
+        let current_index = 0
+
+        while( current_index < index) {
+            current_node = current_node._next_node
+            current_index += 1
+
+            if(!current_node) return null
+        }
+
+        return current_node._data
+    }
 }
 
 const node1 = new Node("one")
@@ -43,3 +57,5 @@ const node4 = new Node('four')
 node3._next_node = node4
 
 const list = new LinkedList(node1)
+
+console.log(list.read(0))
