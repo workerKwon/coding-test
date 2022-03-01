@@ -60,6 +60,33 @@ class LinkedList {
 
         return null
     }
+
+    insert_at_index(index, value) {
+        let current_node = this._first_node
+        let current_index = 0
+        
+        while(current_index < index) {
+            current_node = current_node._next_node
+            current_index += 1
+        }
+
+        const new_node = new Node(value)
+        new_node._next_node = current_node._next_node
+        current_node._next_node = new_node
+    }
+
+    delete_at_index(index) {
+        let current_node = this._first_node
+        let current_index = 0
+
+        while(current_index < index - 1) {
+            current_node = current_node._next_node
+            current_index += 1
+        }
+
+        const node_after_deleted_node = current_node._next_node._next_node
+        current_node._next_node = node_after_deleted_node
+    }
 }
 
 const node1 = new Node("one")
