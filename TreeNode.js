@@ -58,6 +58,14 @@ function lift(node, deletedNode) {
     }
 }
 
+function alphbet_sort(node) {
+    if(!node) return
+
+    alphbet_sort(node.leftChild)
+    console.log(node.value)
+    alphbet_sort(node.rightChild)
+}
+
 const leftNode = new TreeNode(1)
 const rightNode = new TreeNode(10)
 const root = new TreeNode(5, leftNode, rightNode)
