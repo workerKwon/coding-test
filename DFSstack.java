@@ -1,9 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+import java.util.StringTokenizer;
 
-public class BFS {
+public class DFSstack {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -28,19 +31,20 @@ public class BFS {
             graph.get(B[i]).add(A[i]);
         }
 
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(1);
         boolean[] visited = new boolean[N+1];
+        Stack<Integer> stack = new Stack<>();
         visited[1] = true;
-        while (q.size() >= 1) {
-            int pos = q.poll();
-            System.out.print(pos + " ");
-            for(int i : graph.get(pos)) {
-                if(visited[i] == false) {
-                    q.offer(i);
-                    visited[i] = true;
+        stack.push(1);
+        while (stack.size() >= 1) {
+            int pos = stack.pop();
+                System.out.print(pos + " ");
+
+                for(int i : graph.get(pos)) {
+                    if(visited[i] == false) {
+                        stack.push(i);
+                        visited[i] = true;
+                    }
                 }
-            }
         }
     }
 }
